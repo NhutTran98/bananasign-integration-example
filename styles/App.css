@@ -1,0 +1,12 @@
+.App {
+  font-family: sans-serif;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.AppButton {
+  width: 300px;
+  height: 100px;
+  font-size: 30px;
+  text-align: center;
+}
