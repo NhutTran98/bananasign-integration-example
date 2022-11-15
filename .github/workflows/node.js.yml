@@ -1,0 +1,40 @@
+name: GitHub Pages deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+
+      - name: Installing my packages
+        run: npm ci
+
+      - name: Build my App
+        run: npm run build && npm run export && touch ./out/.nojekyll
+        env:
+          NEXT_PUBLIC_BANANASIGN_OAUTH2_ENDPOINT: ${{ secrets.NEXT_PUBLIC_BANANASIGN_OAUTH2_ENDPOINT }}
+          BANANASIGN_OAUTH2_ENDPOINT: ${{ secrets.BANANASIGN_OAUTH2_ENDPOINT }}
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          BASE_URL: ${{ secrets.BASE_URL }}
+          NEXT_PUBLIC_BANANASIGN_WEB_URL: ${{ secrets.NEXT_PUBLIC_BANANASIGN_WEB_URL }}
+          NEXT_PUBLIC_BANANASIGN_END_POINT_URL: ${{ secrets.NEXT_PUBLIC_BANANASIGN_END_POINT_URL }}
+          NEXT_PUBLIC_BANANASIGN_CLIENTID: ${{ secrets.NEXT_PUBLIC_BANANASIGN_CLIENTID }}
+          BANANASIGN_CLIENTID: ${{ secrets.BANANASIGN_CLIENTID }}
+          BANANASIGN_SECRET: ${{ secrets.BANANASIGN_SECRET }}
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: public # The branch the action should deploy to.
+          FOLDER: out # The folder the action should deploy.
