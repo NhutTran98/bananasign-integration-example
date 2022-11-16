@@ -20,7 +20,7 @@ export default function Login({ setData }) {
         setError(err.message);
         return;
       }
-      const res = await fetch('/api/auth-lumin', {
+      const res = await fetch('/bananasign-integration-example/api/auth-lumin', {
         method: 'POST',
         body: JSON.stringify({
           authorizationCode: code,

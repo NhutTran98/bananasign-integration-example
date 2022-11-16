@@ -8,7 +8,10 @@ function MyApp({ Component, pageProps }) {
   const [data, setData] = useState({});
   const router = useRouter();
   useEffect(() => {
-    setData(JSON.parse(window.localStorage.getItem('data')) || {});
+    const localData = JSON.parse(window.localStorage.getItem('data'));
+    if (localData) {
+      setData(localData);
+    } 
   }, []);
 
   const logout = async () => {

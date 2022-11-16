@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router'
 import BananasignWidget from '@bananasign/integrate';
 
 function AppTest({ token }) {
-  console.log("🚀 ~ file: index.js ~ line 5 ~ AppTest ~ token", token)
   const [file, setFile] = useState(null);
   const inputFile = useRef(null) 
 
@@ -42,6 +42,13 @@ function AppTest({ token }) {
 }
 
 export default function Info({ data }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!data.accessToken) {
+      router.push('/login');
+    }
+  }, []);
   return (
     <div>
       <h2>Access Token: {data.accessToken}</h2>
