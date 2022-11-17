@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{ overflow: 'hidden' }}>
       <h1>Lumin 3rd Party Integrate</h1>
       <h2>Third party integrate demo app</h2>
       <Component data={data} setData={setData} {...pageProps} />

@@ -7,6 +7,7 @@ function AppTest({ token }) {
   const inputFile = useRef(null) 
 
   const closeWidget = () => {
+    inputFile.current.value = '';
     setFile(null);
   }
 
@@ -51,7 +52,7 @@ export default function Info({ data }) {
   }, []);
   return (
     <div>
-      <h2>Access Token: {data.accessToken}</h2>
+      <h2 style={{ lineBreak: 'anywhere' }}>Access Token: {data.accessToken}</h2>
       <h2>Email: {data.email}</h2>
       <AppTest token={data.accessToken}/>
     </div>
