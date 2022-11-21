@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@bananasign/integrate": "file:./bananasign-integration-0.0.7.tgz",
+    "@bananasign/integrate": "file:./bananasign-integration-0.0.8.tgz",
     "@salte-auth/auth0": "^3.1.0",
     "@salte-auth/salte-auth": "^3.0.10",
     "@salte-auth/tab": "^3.1.0",
