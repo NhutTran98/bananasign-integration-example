@@ -6,20 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next export",
     "lint": "next lint"
   },
   "dependencies": {
-    "@bananasign/integrate": "file:./bananasign-integration-0.0.8.tgz",
-    "@salte-auth/auth0": "^3.1.0",
-    "@salte-auth/salte-auth": "^3.0.10",
-    "@salte-auth/tab": "^3.1.0",
-    "eslint": "8.27.0",
-    "eslint-config-next": "13.0.3",
-    "jwt-decode": "^3.1.2",
-    "next": "13.0.3",
-    "node-fetch": "2",
+    "@next/font": "13.1.6",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
+    "eslint": "8.33.0",
+    "eslint-config-next": "13.1.6",
+    "next": "13.1.6",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "typescript": "4.9.5"
   }
 }
