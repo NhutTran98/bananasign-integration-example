@@ -1,0 +1,17 @@
+@mixin woff2font($font-family, $font-weight, $font-file) {
+  @font-face {
+    font-family: $font-family;
+    src: url($font-file + ".woff2") format("woff2");
+    font-weight: $font-weight;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+
+@include woff2font("Axiforma", 300, "/fonts/Axiforma/Axiforma-Light");
+@include woff2font("Axiforma", 375, "/fonts/Axiforma/Axiforma-Book");
+@include woff2font("Axiforma", 400, "/fonts/Axiforma/Axiforma-Regular");
+@include woff2font("Axiforma", 500, "/fonts/Axiforma/Axiforma-Medium");
+@include woff2font("Axiforma", 600, "/fonts/Axiforma/Axiforma-SemiBold");
+@include woff2font("Axiforma", 700, "/fonts/Axiforma/Axiforma-Bold");
+@include woff2font("Axiforma", 800, "/fonts/Axiforma/Axiforma-Black");
