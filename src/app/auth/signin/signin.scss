@@ -1,0 +1,96 @@
+.SignIn {
+  height: 100vh;
+  display: flex;
+  &__LeftPanel {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 80px 0 36px;
+    width: 30%;
+
+    &--title {
+      font-family: var(--font-primary);
+      color: var(--color-neutral-100);
+      line-height: 52px;
+      font-weight: 600;
+      font-size: 32px;
+      margin-top: 132px;
+    }
+
+    &--subtitle {
+      font-family: var(--font-primary);
+      color: var(--color-other-23);
+      line-height: 22px;
+      font-weight: 400;
+      font-size: 14px;
+      margin: 24px 0 40px;
+    }
+
+    &--separation {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      line-height: 16px;
+      color: var(--color-other-23);
+      opacity: 0.6;
+      font-size: 12px;
+      margin-top: 40px;
+      &:after,
+      &:before {
+        margin: 0 7px;
+        content: '';
+        box-sizing: border-box;
+        display: block;
+        height: 1px;
+        border: 0.5px solid var(--color-neutral-100);
+        background: var(--color-neutral-100);
+        opacity: 0.2;
+        width: 100%;
+      }
+    }
+
+    &--input {
+      border-color: rgba(16, 45, 66, 0.2);
+    }
+
+    &--forgot {
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    &--signupfree {
+      font-weight: 500;
+    }
+
+    &--button {
+      border-color: rgba(16, 45, 66, 0.2);
+      border-radius: 12px;
+    }
+  }
+
+  &__RightPanel {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-neutral-10);
+    width: 70%;
+    padding: 120px 0 0 80px;
+    position: relative;
+    &--separation {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      line-height: 29px;
+      color: var(--color-neutral-100);
+      font-size: 18px;
+      &:before {
+        margin: 0 7px;
+        content: '';
+        box-sizing: border-box;
+        display: block;
+        height: 1px;
+        border: 2px solid var(--color-neutral-100);
+        background: var(--color-neutral-100);
+        width: 32px;
+      }
+    }
+  }
+}
