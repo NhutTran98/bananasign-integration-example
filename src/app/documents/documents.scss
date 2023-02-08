@@ -1,0 +1,35 @@
+.Document {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &__Header {
+    display: flex;
+    min-height: 74px;
+    padding: 0 80px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__Logo {
+    width: 10%;
+  }
+  &__Body {
+    background-color: var(--color-neutral-10);
+    height: calc(100vh - 74px);
+    padding: 64px 80px;
+    display: flex;
+    flex-direction: column;
+    &--header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &--content {
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+}

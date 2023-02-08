@@ -1,4 +1,6 @@
 'use client'
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation'
 import { Input, Checkbox, HStack, Button, Text, VStack, Img, } from '@chakra-ui/react';
 
 import Logo from "@/components/Logo";
@@ -6,6 +8,16 @@ import "./signin.scss";
 import Link from 'next/link';
 
 export default function Signin() {
+  const [pageLoaded, setPageLoaded] = useState(false);
+  const router = useRouter()
+
+  useEffect(() => {
+    if (localStorage.getItem('id_token')) {
+      router.push('/documents');
+    } else {
+      setPageLoaded(true);
+    }
+  }, [])
 
   const signinWithLumin = () => {
     window.lumin.auth.initialize({
@@ -18,12 +30,13 @@ export default function Signin() {
       onSuccess: ({ access_token, id_token }) => {
         localStorage.setItem('access_token', access_token);
         localStorage.setItem('id_token', id_token);
+        router.push('/documents');
       },
       onError: (error) => console.log(error),
     })
   }
 
-  return (
+  return !pageLoaded ? <div></div> : (
     <div className="SignIn">
       <div className="SignIn__LeftPanel">
         <Logo />

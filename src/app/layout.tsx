@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-sync-scripts */
 'use client'
 import { ChakraProvider, extendBaseTheme } from '@chakra-ui/react'
 import chakraTheme from '@chakra-ui/theme'
-import Script from 'next/script'
 import './globals.scss'
 
-const { Input, Checkbox, Button } = chakraTheme.components
+const { Input, Checkbox, Button, Divider } = chakraTheme.components
 
 const theme = extendBaseTheme({
   colors: {
@@ -13,6 +13,15 @@ const theme = extendBaseTheme({
     },
     common: {
       blue: "#3180F1"
+    },
+    primary: {
+      100: "#0C395B",
+      80: "#50677A",
+      40: "#C6C8C9"
+    },
+    other: {
+      11: "#8e979f",
+      24: "#E7ECF2",
     }
   },
   fonts: {
@@ -22,6 +31,7 @@ const theme = extendBaseTheme({
     Input,
     Checkbox,
     Button,
+    Divider,
   }
 })
 
@@ -32,9 +42,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head />
+      <head>
+        <script type="text/javascript" src="/lib.js"></script>
+      </head>
       <body>
-        <Script src="/lib.js" />
         <ChakraProvider theme={theme}>
           {children}
         </ChakraProvider>
