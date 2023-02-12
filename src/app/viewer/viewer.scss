@@ -1,0 +1,51 @@
+.Viewer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &__Header {
+    display: flex;
+    min-height: 74px;
+    padding: 0 16px 0 80px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__Logo {
+    width: 10%;
+  }
+  &__Body {
+    background-color: var(--color-neutral-10);
+    height: calc(100vh - 74px);
+    display: flex;
+    flex-direction: column;
+    &--container {
+      margin-top: 48px;
+      position: fixed;
+      left: 50%;
+      transform: translate(-50%, 0);
+      height: 100%;
+    }
+
+    &--sendBtn {
+      position: fixed;
+      right: 0;
+      margin-right: 16px;
+      margin-top: 48px;
+    }
+    &--navigator {
+      position: fixed;
+      bottom: 0;
+      width: fit-content;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 12px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      left: 50%;
+      background-color: var(--color-neutral-0);
+      margin-bottom: 16px;
+      display: flex;
+      border-radius: 8px;
+    }
+  }
+}

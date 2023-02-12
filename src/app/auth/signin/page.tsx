@@ -94,7 +94,7 @@ export default function Signin() {
           </HStack>
         </HStack>
         <Text fontWeight={500} fontSize={18} color="neutral.100" opacity={0.18}>Invester, Grapejuice.com</Text>
-        <Img src="/assets/ad.png" alt="ad" position="fixed" right={0} bottom={0} />
+        <Img src="/assets/ad.png" alt="ad" position="fixed" right={0} bottom={0} height="calc(100vh / 2)"/>
       </div>
     </div>
   )

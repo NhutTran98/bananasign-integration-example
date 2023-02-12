@@ -174,16 +174,6 @@ export default function Document() {
               }
             </HStack>
           </HStack>
-          {/* <Input 
-            type="file"
-            onChange={(e) => {
-              window.lumin.sign.sendAndSign({
-                accessToken: localStorage.getItem('access_token'),
-                fileData: e.target.files[0],
-                fileName: 'test'
-              })
-            }}
-          /> */}
           <input
             onChange={(e) => addFiles(e.target.files)}
             type='file'
@@ -192,7 +182,6 @@ export default function Document() {
             ref={inputRef}
             hidden />
           <Button
-            border="1px solid"
             fontWeight={500}
             fontSize={14}
             borderRadius={12}
@@ -223,57 +212,57 @@ export default function Document() {
              {
              fileList.map((file, i) => (
                 <React.Fragment key={i}>
-                <HStack width="100%" paddingTop={5} paddingBottom={i === 9 ? 5 : 0}>
-                  <Box width="30%">
-                    <HStack>
-                      <Image alt="prod" src="https://picsum.photos/200/300" width={20} height={20} borderRadius={8}/>
+                  <HStack width="100%" paddingTop={5} paddingBottom={i === 9 ? 5 : 0} onClick={() => router.push(`/viewer/${i}`)} cursor="pointer">
+                    <Box width="30%">
+                      <HStack>
+                        <Image alt="prod" src="https://picsum.photos/200/300" width={20} height={20} borderRadius={8}/>
+                        <VStack alignItems="flex-start">
+                          <Text fontWeight={500} fontSize={16} color="primary.100">{file.fileName}</Text>
+                          <Text fontWeight={500} fontSize={10} color="primary.80">41 Esplanade</Text>
+                          <Text fontWeight={500} fontSize={10} color="primary.80">{file.price} p/m</Text>
+                        </VStack>
+                      </HStack>
+                    </Box>
+                    <Box width="20%">
                       <VStack alignItems="flex-start">
-                        <Text fontWeight={500} fontSize={16} color="primary.100">{file.fileName}</Text>
-                        <Text fontWeight={500} fontSize={10} color="primary.80">41 Esplanade</Text>
-                        <Text fontWeight={500} fontSize={10} color="primary.80">{file.price} p/m</Text>
+                        <Text fontWeight={500} fontSize={10} color="primary.100">3 major leads</Text>
+                        <HStack>
+                          <Avatar width={8} height={8} src="https://picsum.photos/200/300"/>
+                          <Avatar width={8} height={8} src="https://picsum.photos/200/300"/>
+                          <Avatar width={8} height={8} src="https://picsum.photos/200/300"/>
+                        </HStack>
                       </VStack>
-                    </HStack>
-                  </Box>
-                  <Box width="20%">
-                    <VStack alignItems="flex-start">
-                      <Text fontWeight={500} fontSize={10} color="primary.100">3 major leads</Text>
-                      <HStack>
-                        <Avatar width={8} height={8} src="https://picsum.photos/200/300"/>
-                        <Avatar width={8} height={8} src="https://picsum.photos/200/300"/>
-                        <Avatar width={8} height={8} src="https://picsum.photos/200/300"/>
+                    </Box>
+                    <Box width="10%">
+                      <VStack alignItems="flex-start">
+                        <HStack>
+                          <Image alt="arrow" src="/assets/arrow.svg" width="14px" height="14px" borderRadius={8}/>
+                          <Text fontWeight={500} fontSize={14} color="primary.100">{file.stat}</Text>
+                        </HStack>
+                        <Text fontWeight={500} fontSize={10} color="primary.100">Total view</Text>
+                      </VStack>
+                    </Box>
+                    <Box width="20%">
+                      <VStack alignItems="flex-start">
+                        <Text fontWeight={500} fontSize={14} color="primary.100">6 Aug | 12:20pm</Text>
+                        <Text fontWeight={500} fontSize={10} color="primary.100">{file.day} days ago</Text>
+                      </VStack>
+                    </Box>
+                    <Box width="10%">
+                      <Text fontWeight={500} fontSize={10} color="pr  imary.100">Till {file.status} Dec</Text>
+                    </Box>
+                    <Box width="20%">
+                      <HStack alignItems="flex-start">
+                        <Image alt="edit" src="/assets/edit.svg" width="54px" height="32px" borderRadius={8}/>
+                        {
+                          sendAndSignLoading ? <Spinner width={8} height={8}/> : (
+                            <lumin-sign size="small" onClick={() => sendAndSign(file.file, file.fileName)}/>
+                          )
+                        }
                       </HStack>
-                    </VStack>
-                  </Box>
-                  <Box width="10%">
-                    <VStack alignItems="flex-start">
-                      <HStack>
-                        <Image alt="arrow" src="/assets/arrow.svg" width="14px" height="14px" borderRadius={8}/>
-                        <Text fontWeight={500} fontSize={14} color="primary.100">{file.stat}</Text>
-                      </HStack>
-                      <Text fontWeight={500} fontSize={10} color="primary.100">Total view</Text>
-                    </VStack>
-                  </Box>
-                  <Box width="20%">
-                    <VStack alignItems="flex-start">
-                      <Text fontWeight={500} fontSize={14} color="primary.100">6 Aug | 12:20pm</Text>
-                      <Text fontWeight={500} fontSize={10} color="primary.100">{file.day} days ago</Text>
-                    </VStack>
-                  </Box>
-                  <Box width="10%">
-                    <Text fontWeight={500} fontSize={10} color="pr  imary.100">Till {file.status} Dec</Text>
-                  </Box>
-                  <Box width="20%">
-                    <HStack alignItems="flex-start">
-                      <Image alt="edit" src="/assets/edit.svg" width="54px" height="32px" borderRadius={8}/>
-                      {
-                        sendAndSignLoading ? <Spinner width={8} height={8}/> : (
-                          <lumin-sign size="small" onClick={() => sendAndSign(file.file, file.fileName)}/>
-                        )
-                      }
-                    </HStack>
-                  </Box>
-                </HStack>
-                { i !== 9 && <Divider color="primary.40"/> }
+                    </Box>
+                  </HStack>
+                  { i !== 9 && <Divider color="primary.40"/> }
                 </React.Fragment>
               ))
              }
