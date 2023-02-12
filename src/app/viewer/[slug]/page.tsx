@@ -1,8 +1,10 @@
 'use client'
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation'
 import { get, del } from 'idb-keyval';
 import { Document, Page, pdfjs } from 'react-pdf';
+    // @ts-ignore
 import url from "pdfjs-dist/build/pdf.worker";
 
 import {
@@ -19,11 +21,11 @@ import "../viewer.scss";
 
 pdfjs.GlobalWorkerOptions.workerSrc = url
 
-export default function Viewer() {
+export default function Viewer({ params }: any) {
   const [pageLoaded, setPageLoaded] = useState(false);
-  const [scale, setScale] = useState(0.8);
+  const [scale, setScale] = useState<any>(0.8);
   const [currentPage, setCurrentPage] = useState(1);
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<any>(null);
   const [numPages, setNumPages] = useState(0);
   const [sendAndSignLoading, setSendAndSignLoading] = useState(false);
   const router = useRouter();
@@ -31,14 +33,17 @@ export default function Viewer() {
   useEffect(() => {
     const loadFile = async () => {
       const fileList = await get('file-list');
-
+      if (!fileList[Number(params.slug)]) {
+        router.push('/auth/signin');
+        return;
+      }
       setFile({
-        ...fileList[0],
-        file: URL.createObjectURL(fileList[0].file),
+        ...fileList[Number(params.slug)],
+        file: URL.createObjectURL(fileList[Number(params.slug)].file),
       });
       setPageLoaded(true);
     }
-    if (!localStorage.getItem('id_token')) {
+    if (!localStorage.getItem('id_token') || Number.isNaN(Number(params.slug))) {
       router.push('/auth/signin');
     } else {
       loadFile();
@@ -46,11 +51,14 @@ export default function Viewer() {
   }, [])
 
   const sendAndSign = () => {
+    if (!file) {
+      return;
+    }
     window.lumin.sign.sendAndSign({
       accessToken: localStorage.getItem('access_token'),
       fileData: file.file,
       fileName: file.fileName,
-      onError: (e) => console.log(e),
+      onError: (e: any) => console.log(e),
       onLoading: setSendAndSignLoading,
     }) 
   }
@@ -113,6 +121,7 @@ export default function Viewer() {
       <div className="Viewer__Body">
         <div className="Viewer__Body--sendBtn">
           {
+            // @ts-ignore */}
              sendAndSignLoading ? <Spinner width={8} height={8} /> : <lumin-sign onClick={sendAndSign}/>
           }
         </div>

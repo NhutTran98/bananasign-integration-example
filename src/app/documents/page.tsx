@@ -33,7 +33,7 @@ export default function Document() {
   const [pageLoaded, setPageLoaded] = useState(false);
   const inputRef = useRef(null);
   const [fileList, setFileList] = useState<{
-    fileName: string, file: File, stat: number, day: number, status: number, price: number
+    fileName: string, file: File | unknown, stat: number, day: number, status: number, price: number
   }[]>([]); 
   const [sendAndSignLoading, setSendAndSignLoading] = useState(false);
   const router = useRouter();
@@ -54,7 +54,7 @@ export default function Document() {
   const convertFileToBlob = (file: File) => {
     return new Promise((resolve) => {
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function(e: any) {
         const blob = new Blob([new Uint8Array(e.target.result)], {type: file.type });
         resolve(blob)
       };
@@ -65,7 +65,7 @@ export default function Document() {
     })
   };
 
-  const addFiles = async (files) => {
+  const addFiles = async (files: File[]) => {
     const newFiles = [];
     for (const file of files) {
       const blobFile = await convertFileToBlob(file);
@@ -86,12 +86,12 @@ export default function Document() {
       })
   }
 
-  const sendAndSign = (file, fileName) => {
+  const sendAndSign = (file: File, fileName: string) => {
     window.lumin.sign.sendAndSign({
       accessToken: localStorage.getItem('access_token'),
       fileData: file,
       fileName,
-      onError: (e) => console.log(e),
+      onError: (e: any) => console.log(e),
       onLoading: setSendAndSignLoading,
     }) 
   }
@@ -175,7 +175,7 @@ export default function Document() {
             </HStack>
           </HStack>
           <input
-            onChange={(e) => addFiles(e.target.files)}
+            onChange={(e: any) => addFiles(e.target.files)}
             type='file'
             accept="application/pdf"
             multiple
@@ -187,6 +187,7 @@ export default function Document() {
             borderRadius={12}
             colorScheme='messenger'
             minWidth={190}
+            // @ts-ignore */}
             onClick={() => inputRef.current?.click()}
             leftIcon={<span style={{ fontSize: 20 }}>+</span>}
             borderColor="primary.100">
@@ -201,7 +202,7 @@ export default function Document() {
             borderTopLeftRadius={8}
             borderTopRightRadius={8}
             padding="12px 40px"> 
-              <Text width="30%" fontWeight={500} fontSize={12} color="primary.100">PROPERTY</Text>
+              <Text minWidth="30%" width="30%" fontWeight={500} fontSize={12} color="primary.100">PROPERTY</Text>
               <Text width="20%" fontWeight={500} fontSize={12} color="primary.100">LEADS</Text>
               <Text width="10%" fontWeight={500} fontSize={12} color="primary.100">STATS</Text>
               <Text width="20%" fontWeight={500} fontSize={12} color="primary.100">POSTED ON</Text>
@@ -213,11 +214,11 @@ export default function Document() {
              fileList.map((file, i) => (
                 <React.Fragment key={i}>
                   <HStack width="100%" paddingTop={5} paddingBottom={i === 9 ? 5 : 0} onClick={() => router.push(`/viewer/${i}`)} cursor="pointer">
-                    <Box width="30%">
-                      <HStack>
-                        <Image alt="prod" src="https://picsum.photos/200/300" width={20} height={20} borderRadius={8}/>
-                        <VStack alignItems="flex-start">
-                          <Text fontWeight={500} fontSize={16} color="primary.100">{file.fileName}</Text>
+                    <Box minWidth="30%" width="30%">
+                      <HStack width="100%" overflow="hidden">
+                        <Image alt="prod" src={`https://picsum.photos/200/300?random=${i}`} minWidth={20} height={20} borderRadius={8}/>
+                        <VStack alignItems="flex-start" width="inherit" overflow="hidden">
+                          <Text width="100%" whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden" fontWeight={500} fontSize={16} color="primary.100">{file.fileName}</Text>
                           <Text fontWeight={500} fontSize={10} color="primary.80">41 Esplanade</Text>
                           <Text fontWeight={500} fontSize={10} color="primary.80">{file.price} p/m</Text>
                         </VStack>
@@ -256,6 +257,7 @@ export default function Document() {
                         <Image alt="edit" src="/assets/edit.svg" width="54px" height="32px" borderRadius={8}/>
                         {
                           sendAndSignLoading ? <Spinner width={8} height={8}/> : (
+                            // @ts-ignore */}
                             <lumin-sign size="small" onClick={() => sendAndSign(file.file, file.fileName)}/>
                           )
                         }

@@ -7,6 +7,10 @@ import Logo from "@/components/Logo";
 import "./signin.scss";
 import Link from 'next/link';
 
+declare global {
+  interface Window { lumin: any; }
+}
+
 export default function Signin() {
   const [pageLoaded, setPageLoaded] = useState(false);
   const router = useRouter()
@@ -26,14 +30,7 @@ export default function Signin() {
       response_type: 'id_token token',
       redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI
     })
-    window.lumin.auth.signin({
-      onSuccess: ({ access_token, id_token }) => {
-        localStorage.setItem('access_token', access_token);
-        localStorage.setItem('id_token', id_token);
-        router.push('/documents');
-      },
-      onError: (error) => console.log(error),
-    })
+    window.lumin.auth.signin()
   }
 
   return !pageLoaded ? <div></div> : (
